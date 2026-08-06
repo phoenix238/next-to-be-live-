@@ -142,16 +142,16 @@
   /* ---------- Hero ---------- */
   .hero{padding:clamp(48px,7vw,90px) 0 var(--section-y);}
   .hero-grid{display:grid;grid-template-columns:1.02fr 1fr;gap:clamp(36px,5vw,72px);align-items:center;}
-  .hero h1{font-size:clamp(52px,8.4vw,104px);letter-spacing:-.5px;margin-bottom:clamp(24px,3vw,38px);}
+  .hero h1{font-size:clamp(28px,4vw,56px);letter-spacing:-.5px;margin-bottom:clamp(24px,3vw,38px);white-space:nowrap;}
   .hero .lede{font-size:clamp(19px,1.4vw,22px);max-width:34ch;margin:0 0 26px;}
   .hero .italic{font-style:italic;max-width:34ch;opacity:.92;}
-  .hero-img img{width:100%;height:auto;object-fit:cover;border-radius:var(--radius);box-shadow:0 24px 60px rgba(87,58,31,.14);}
+  .hero-img img{width:100%;height:auto;object-fit:cover;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.14);}
 
   /* ---------- Explainer (cream) ---------- */
-  .explainer{padding:var(--section-y) 0 0;}
-  .explainer-grid{display:grid;grid-template-columns:1fr 1.02fr;gap:clamp(36px,5vw,72px);align-items:center;}
-  .explainer-img img{width:100%;height:auto;border-radius:var(--radius);box-shadow:0 24px 60px rgba(87,58,31,.14);}
-  .explainer h2{font-size:clamp(38px,5vw,64px);text-align:right;margin-bottom:30px;}
+  .explainer{padding:var(--section-y) 0 0;background:#fff;}
+  .explainer-grid{display:grid;grid-template-columns:1fr 1.02fr;gap:clamp(36px,5vw,72px);align-items:start;}
+  .explainer-img img{width:100%;height:auto;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.14);}
+  .explainer h2{font-size:clamp(34px,4vw,52px);text-align:left;margin-bottom:30px;}
   .explainer p{margin:0 0 20px;}
   .explainer .actions{margin-top:26px;}
   .pullquote{
@@ -165,13 +165,14 @@
   .about{padding:var(--section-y) 0;}
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,72px);align-items:center;}
   .about h2{font-size:clamp(34px,4vw,52px);margin-bottom:30px;}
+  .about h3{font-family:'Marcellus',serif;font-size:clamp(21px,1.9vw,26px);margin:32px 0 14px;}
   .about p{margin:0 0 20px;}
   .about .cite{font-style:italic;margin-top:28px;opacity:.9;}
-  .about .portrait img{border-radius:var(--radius);box-shadow:0 24px 60px rgba(87,58,31,.16);}
+  .about .portrait img{border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.16);}
 
   /* ---------- FAQ (red) ---------- */
   .faq{background:var(--red);color:var(--red-text);padding:var(--section-y) 0;}
-  .faq h2{text-align:center;font-size:clamp(44px,6vw,78px);margin-bottom:clamp(36px,4.5vw,56px);}
+  .faq h2{text-align:center;font-size:clamp(34px,4vw,52px);margin-bottom:clamp(36px,4.5vw,56px);}
   .faq-list{max-width:1000px;margin:0 auto;}
   .faq-item{border-top:1px solid var(--line-light);}
   .faq-list .faq-item:last-child{border-bottom:1px solid var(--line-light);}
@@ -195,7 +196,7 @@
      negative space. The stage's height IS the image height, and the verse offset
      uses percentage padding — which resolves against WIDTH — so the text keeps
      exactly the same position over the artwork at every viewport size. */
-  .poem{position:relative;background:var(--cream);overflow:hidden;}
+  .poem{position:relative;background:#fff;overflow:hidden;}
   .poem-stage{position:relative;width:100%;}
   .poem-illus{
     position:relative;display:block;width:100%;height:auto;
@@ -238,8 +239,8 @@
 
   /* ---------- Contact (cream) ---------- */
   .contact{padding:var(--section-y) 0;}
-  .contact h2{text-align:center;font-size:clamp(42px,5.5vw,74px);margin-bottom:clamp(40px,5vw,64px);}
-  .contact-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(36px,5vw,72px);align-items:start;}
+  .contact h2{text-align:center;font-size:clamp(34px,4vw,52px);margin-bottom:clamp(40px,5vw,64px);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(36px,5vw,72px);align-items:start;}
   .contact-intro p{font-size:clamp(19px,1.4vw,22px);margin:0 0 32px;}
   .contact-intro p:last-child{margin-bottom:0;}
   .find-me{margin:34px 0 0;padding-top:28px;border-top:1px solid var(--line-dark);}
@@ -247,17 +248,17 @@
   .find-me address{font-style:normal;line-height:1.5;margin:0 0 14px;}
   .find-me .directions{display:inline-block;font-family:'Marcellus',serif;font-size:17px;letter-spacing:.3px;text-decoration:none;border-bottom:1px solid var(--brown);padding-bottom:1px;transition:opacity .2s;}
   .find-me .directions:hover{opacity:.6;}
-  form .group-label{display:block;font-size:20px;margin:0 0 10px;}
-  form .row{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
-  form label{display:block;font-size:19px;margin:0 0 8px;}
-  form label .req{opacity:.55;font-size:15px;}
-  form .field{margin-bottom:24px;}
+  form .group-label{display:block;font-size:18px;margin:0 0 9px;}
+  form .row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  form label{display:block;font-size:17px;margin:0 0 7px;}
+  form label .req{opacity:.55;font-size:14px;}
+  form .field{margin-bottom:20px;}
   input,textarea{
-    width:100%;font-family:inherit;font-size:18px;color:var(--brown);
-    background:var(--cream);border:1.5px solid var(--brown);border-radius:30px;
-    padding:14px 20px;transition:border-color .2s,box-shadow .2s,background .2s;
+    width:100%;font-family:inherit;font-size:16.5px;color:var(--brown);
+    background:var(--cream);border:1.5px solid var(--brown);border-radius:28px;
+    padding:11px 18px;transition:border-color .2s,box-shadow .2s,background .2s;
   }
-  textarea{border-radius:20px;min-height:150px;resize:vertical;}
+  textarea{border-radius:18px;min-height:128px;resize:vertical;}
   input:focus,textarea:focus{outline:none;border-color:var(--brown-btn);background:var(--cream-2);box-shadow:0 0 0 3px rgba(87,58,31,.12);}
   .submit-wrap{text-align:center;margin-top:18px;}
   .form-success{
@@ -274,7 +275,7 @@
   /* ---------- Testimonials (red) ---------- */
   .testimonials{background:var(--red);color:var(--red-text);padding:var(--section-y) 0;overflow:hidden;}
   .twrap{max-width:1500px;margin:0 auto;padding:0 var(--gutter);}
-  .testimonials h2{font-size:clamp(40px,5vw,64px);margin-bottom:clamp(30px,4vw,46px);}
+  .testimonials h2{font-size:clamp(34px,4vw,52px);margin-bottom:clamp(30px,4vw,46px);}
   .carousel{position:relative;}
   /* viewport clips the track AND fades both edges, so the neighbouring
      (unread) cards dissolve instead of ending on a hard cut line.
@@ -379,9 +380,8 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy reveal">
-      <h1>Craniosacral<br>Therapy</h1>
+      <h1>Craniosacral Therapy</h1>
       <p class="lede">Craniosacral therapy is a gentle, heart-centred practice, which works with the innate intelligence of the body and its capacity for healing and transformation.</p>
-      <p class="italic">This gentle, profound form of touch therapy invites us into deeper intimacy with ourselves, our lives and the world.</p>
     </div>
     <div class="hero-img reveal">
       <img src="images/hero-grass.jpg" alt="Hands resting gently on a person's feet in long grass" />
@@ -397,7 +397,6 @@
     </div>
     <div class="explainer-copy reveal">
       <h2>The Practice</h2>
-      <p>Craniosacral therapy is a gentle, heart-centred practice, which works with the innate intelligence of the body and its capacity for profound healing and transformation.</p>
       <p>Craniosacral therapy works by creating a safe relational field where this intelligence and the heartfelt awareness of the practitioner, supports coming into physical, emotional, psychological and spiritual alignment, restoring balance and flow. In listening and attuning to the whole person, identifying deeply ingrained patterns and facilitating profound releases we support a return to wholeness and health.</p>
       <p>The foundational principle of Craniosacral therapy is that health is always present. By tuning into the body&rsquo;s subtle rhythms we work with the whole person supporting circulation of craniosacral fluid, blood and lymph to support the immune system function and help the body enhance and maintain vitality and support integration towards a harmonious whole.</p>
       <div class="actions">
@@ -416,6 +415,9 @@
       <p>Emily holds a deep appreciation for bodies and how we inhabit them. As a yoga teacher, she has cultivated a capacity for stillness, listening and presence which she brings wholeheartedly to her work.</p>
       <p>Through Craniosacral therapy, Emily helps us to come more fully into our aliveness, enabling a more expansive perspective and appreciation for life. This presence and groundedness supports us to come home to ourselves.</p>
       <p>Trained at the College of Cranio-Sacral Therapy in London, Emily takes an integrative approach to treatment and draws from her massage training, yoga and Qigong practice, and interest in nutrition.</p>
+      <h3>How Emily Works</h3>
+      <p>Sessions are unhurried. There is time at the beginning to talk, time on the couch, and time afterwards to come back to yourself before stepping out into the day. Nothing is rushed, and nothing is done to you that you have not understood first.</p>
+      <p>Emily practises from a quiet room in Portobello, Edinburgh&rsquo;s seaside neighbourhood on the east of the city. Sessions last up to an hour.</p>
       <p class="cite">&lsquo;What is the body? That shaddow of a shaddow of your love, that somehow contains the whole universe&rsquo; - Rumi</p>
     </div>
     <div class="portrait reveal">
@@ -439,12 +441,61 @@
         </div>
       </div>
       <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span class="sign">+</span> Where does craniosacral therapy come from?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Craniosacral therapy grew out of osteopathy in the early twentieth century, when practitioners began to notice a subtle, tidal motion expressing itself through the whole body &mdash; not only in the bones of the skull and the base of the spine, from which the work takes its name, but through the fluids and tissues throughout.</p>
+            <p>What has been carried forward from that early noticing is less a technique than a way of paying attention. The hands rest lightly. Nothing is forced. The work is slow because the body sets the pace, and because what is subtle only becomes audible in stillness.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span class="sign">+</span> What does a treatment look like?</button>
         <div class="faq-a">
           <div class="faq-a-inner">
             <p>Following an initial conversation and brief case history you will usually lie down fully clothed on the couch, covered by a blanket for comfort. The practitioner will then tune in to your system using light touch, following the whole body and its subtle rhythms to address tensions as they manifest.</p>
             <p>People often find treatments profoundly relaxing and rebalancing. Your body determines where we work so that you remain in control and able to integrate what you are experiencing.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span class="sign">+</span> What does a session feel like?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Most people describe it as deeply relaxing. The touch is light and still rather than manipulative, and there is often a sense of settling, of warmth, or of more space than there was before. Some people talk throughout; many drift. There is no right way to be.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span class="sign">+</span> What should I wear?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Whatever you are comfortable in. You stay fully clothed for the whole session, so soft, loose layers are ideal &mdash; you will be lying down under a blanket, so it is worth wearing something you do not mind resting in.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span class="sign">+</span> How long is a session, and how many might I need?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
             <p>A CST session usually lasts up to one hour. People often report relief after just one or two sessions, but a series of treatments may be recommended, depending on your body&rsquo;s needs.</p>
+            <p>There is never any obligation to book a course. Emily will talk through what she notices and you can decide from there.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span class="sign">+</span> Is it suitable for babies and children?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Yes &mdash; it is suitable for those of all ages, from babies to the elderly. The touch used is very light throughout. Parents are welcome to stay close for the whole session, and babies are not expected to lie still or be quiet.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span class="sign">+</span> What if I need to cancel?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Patients are expected to attend appointments on time and give 24 hours&rsquo; notice if they need to change or cancel. In the rare case of Emily needing to cancel an appointment she will give a minimum of 24 hours&rsquo; notice.</p>
           </div>
         </div>
       </div>
@@ -461,19 +512,7 @@
     <img class="poem-illus reveal" src="images/illustration-soft.png" alt="Watercolour illustration of a craniosacral therapy treatment" />
     <div class="verse-layer">
       <div class="verse">
-        <p class="verse-full">Awaken to the mystery of being here and enter the quiet immensity of your own presence.<br>
-Have joy and peace in the temple of your senses.<br>
-Receive encouragement when new frontiers beckon.<br>
-Respond to the call of your gift and the courage to follow its path.<br>
-Let the flame of anger free you of all falsity.<br>
-May warmth of heart keep your presence aflame.<br>
-May anxiety never linger about you.<br>
-May your outer dignity mirror an inner dignity of soul.<br>
-Take time to celebrate the quiet miracles that seek no attention.<br>
-Be consoled in the secret symmetry of your soul.<br>
-May you experience each day as a sacred gift woven around the heart of wonder.</p>
-        <p class="author verse-full">John O&rsquo;Donohue</p>
-        <p class="verse-mobile">This gentle, profound form of touch therapy invites us into deeper intimacy with ourselves, our lives and the world.</p>
+        <p>This gentle, profound form of touch therapy invites us into deeper intimacy with ourselves, our lives and the world.</p>
       </div>
     </div>
   </div>
@@ -488,7 +527,6 @@ May you experience each day as a sacred gift woven around the heart of wonder.</
         <p>Emily is currently practicing in Portobello, Edinburgh at her private practice.</p>
         <p>Please get in touch to make an appointment.</p>
         <div class="find-me">
-          <h3>Find me</h3>
           <address>
             Emily Haquin — Craniosacral Therapy<br>
             19 Rosefield Avenue<br>
