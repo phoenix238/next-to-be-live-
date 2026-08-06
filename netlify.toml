@@ -1,0 +1,11 @@
+# Netlify configuration
+# The site is a static single-page site — no build step required.
+
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
