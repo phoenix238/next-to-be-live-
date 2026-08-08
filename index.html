@@ -345,21 +345,22 @@
     .header-inner{gap:14px;}
     .about .portrait{order:-1;}
     form .row{grid-template-columns:1fr;gap:0;}
+    /* Testimonials on mobile: one full-width card, sized to its text so nothing
+       is clipped; arrows centred and larger so they're easy to tap. Swipe is
+       wired up in JS below. */
     .slide{flex-basis:100%;padding:0;opacity:1;}
-    .carousel-viewport{-webkit-mask-image:none;mask-image:none;}
+    .carousel-viewport{-webkit-mask-image:none;mask-image:none;touch-action:pan-y;}
+    .card{padding:clamp(24px,6vw,40px);min-height:0;border-radius:12px;}
+    .card p{font-size:clamp(17px,4.3vw,20px);line-height:1.55;}
+    .car-controls{justify-content:center;gap:32px;margin-top:24px;}
+    .arrow{width:56px;height:56px;font-size:23px;background:rgba(239,230,223,.5);}
+    .arrow:active{transform:scale(.94);}
     .footer-inner{flex-direction:column;text-align:center;gap:12px;}
-    /* poem stacks: verse first, illustration full width below */
-    .poem{padding:clamp(40px,10vw,64px) 0 0;}
-    .poem-stage{display:flex;flex-direction:column;}
-    .verse-layer{
-      position:static;inset:auto;order:-1;
-      /* reset the desktop quadrant box: full width, natural height */
-      width:auto;height:auto;display:block;
-      padding:0 var(--gutter);
-    }
-    /* same size as the body copy, matching the other sections */
-    .poem .verse{max-width:none;font-size:inherit;}
-    .poem-illus{margin-top:26px;}
+    /* poem: keep the desktop overlay on mobile — the quote sits in the white
+       upper-left area of the illustration and the head runs up to the red
+       section above, exactly like desktop. Only the font scales down so the
+       quote fits the smaller white box. */
+    .poem .verse{font-size:clamp(11px,3.6vw,18px);line-height:1.45;}
   }
 </style>
 </head>
@@ -647,6 +648,21 @@
     if(prev) prev.addEventListener('click', function(){ go(i-1); });
     if(next) next.addEventListener('click', function(){ go(i+1); });
     window.addEventListener('resize', function(){ go(i); });
+
+    /* Touch swipe (mobile): a horizontal drag past a small threshold moves one
+       card; vertical scrolling is left untouched. */
+    var sx = null, sy = null;
+    viewport.addEventListener('touchstart', function(e){
+      sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+    }, {passive:true});
+    viewport.addEventListener('touchend', function(e){
+      if(sx === null) return;
+      var dx = e.changedTouches[0].clientX - sx;
+      var dy = e.changedTouches[0].clientY - sy;
+      if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)){ go(dx < 0 ? i + 1 : i - 1); }
+      sx = sy = null;
+    }, {passive:true});
+
     go(0);
   })();
 
