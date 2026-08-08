@@ -67,7 +67,8 @@
     --maxw:1240px;
     --gutter:clamp(22px,5vw,48px);
     --section-y:clamp(64px,9vw,112px);
-    --img-h:clamp(360px,42vw,540px);   /* shared height for the P1/P2/P3 photos */
+    --img-h:clamp(360px,42vw,540px);        /* shared height for the P1/P2/P3 photos */
+    --img-w:calc(var(--img-h) * .75);       /* shared 3:4 box, so all three match */
     --radius:22px;
     --ease:cubic-bezier(.22,.61,.36,1);
   }
@@ -148,15 +149,16 @@
   .hero .italic{font-style:italic;max-width:48ch;opacity:.92;}
   /* image smaller and centred in its column, matched to the shared photo height */
   .hero-img{display:flex;justify-content:center;}
-  .hero-img img{width:auto;max-width:100%;height:var(--img-h);object-fit:cover;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.14);}
+  .hero-img img{width:var(--img-w);max-width:100%;height:var(--img-h);object-fit:cover;object-position:center;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.14);}
 
   /* ---------- Explainer (cream) ---------- */
   .explainer{padding:var(--section-y) 0 0;background:#fff;}
-  .explainer-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(36px,5vw,72px);align-items:start;}
-  /* portrait crop so the landscape photo reads as tall as the P1/P3 photos and
-     its top lines up with the body copy */
+  /* same layout as the About Emily section: two even columns, top-aligned, with
+     a fixed 3:4 photo box (--img-w x --img-h) so the photo top sits level with
+     the heading and the photo matches the P1/P3 photos. */
+  .explainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,72px);align-items:start;}
   .explainer-img{display:flex;justify-content:center;}
-  .explainer-img img{width:auto;max-width:100%;height:var(--img-h);object-fit:cover;object-position:center;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.14);}
+  .explainer-img img{width:var(--img-w);max-width:100%;height:var(--img-h);object-fit:cover;object-position:center;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.14);}
   .explainer h2{font-size:clamp(34px,4vw,52px);text-align:left;margin-bottom:30px;}
   .explainer p{margin:0 0 20px;}
   .explainer .actions{margin-top:26px;}
@@ -176,7 +178,7 @@
   .about p{margin:0 0 20px;}
   .about .cite{font-style:italic;margin-top:28px;opacity:.9;}
   .about .portrait{display:flex;justify-content:center;}
-  .about .portrait img{width:auto;max-width:100%;height:var(--img-h);object-fit:cover;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.16);}
+  .about .portrait img{width:var(--img-w);max-width:100%;height:var(--img-h);object-fit:cover;object-position:center;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.16);}
 
   /* ---------- FAQ (red) ---------- */
   .faq{background:var(--red);color:var(--red-text);padding:var(--section-y) 0;}
@@ -224,8 +226,10 @@
   }
   .poem .verse{
     pointer-events:auto;
-    /* condensed to ~2 lines, centred, at the same size as the body copy */
-    max-width:30ch;text-align:center;
+    /* condensed to 2 lines, centred, at the same size as the body copy.
+       The line is 116 characters; 62ch is the first width that wraps it to
+       exactly two lines, with balance evening them out. */
+    max-width:62ch;text-align:center;text-wrap:balance;
     font-style:italic;font-size:clamp(18px,.55vw + 16px,20px);line-height:1.6;
     /* scroll-scrubbed fade-in (driven by JS below); reduced-motion resets it */
     opacity:0;transform:translateY(20px);will-change:opacity,transform;
@@ -348,12 +352,12 @@
     .poem-stage{display:flex;flex-direction:column;}
     .verse-layer{
       position:static;inset:auto;order:-1;
-      padding:0 var(--gutter);height:auto;
+      /* reset the desktop quadrant box: full width, natural height */
+      width:auto;height:auto;display:block;
+      padding:0 var(--gutter);
     }
-    .poem .verse{max-width:none;font-size:clamp(17px,2.2vw,20px);}
-    /* on mobile the O'Donohue verse is removed and the single line shown */
-    .poem .verse-full{display:none;}
-    .poem .verse-mobile{display:block;font-size:clamp(17px,2.4vw,21px);}
+    /* same size as the body copy, matching the other sections */
+    .poem .verse{max-width:none;font-size:inherit;}
     .poem-illus{margin-top:26px;}
   }
 </style>
