@@ -67,6 +67,7 @@
     --maxw:1240px;
     --gutter:clamp(22px,5vw,48px);
     --section-y:clamp(64px,9vw,112px);
+    --img-h:clamp(360px,42vw,540px);   /* shared height for the P1/P2/P3 photos */
     --radius:22px;
     --ease:cubic-bezier(.22,.61,.36,1);
   }
@@ -141,16 +142,21 @@
 
   /* ---------- Hero ---------- */
   .hero{padding:clamp(48px,7vw,90px) 0 var(--section-y);}
-  .hero-grid{display:grid;grid-template-columns:1.02fr 1fr;gap:clamp(36px,5vw,72px);align-items:center;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(36px,5vw,72px);align-items:center;}
   .hero h1{font-size:clamp(28px,4vw,56px);letter-spacing:-.5px;margin-bottom:clamp(24px,3vw,38px);white-space:nowrap;}
-  .hero .lede{font-size:clamp(19px,1.4vw,22px);max-width:34ch;margin:0 0 26px;}
-  .hero .italic{font-style:italic;max-width:34ch;opacity:.92;}
-  .hero-img img{width:100%;height:auto;object-fit:cover;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.14);}
+  .hero .lede{font-size:clamp(19px,1.4vw,22px);max-width:48ch;margin:0 0 26px;}
+  .hero .italic{font-style:italic;max-width:48ch;opacity:.92;}
+  /* image smaller and centred in its column, matched to the shared photo height */
+  .hero-img{display:flex;justify-content:center;}
+  .hero-img img{width:auto;max-width:100%;height:var(--img-h);object-fit:cover;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.14);}
 
   /* ---------- Explainer (cream) ---------- */
   .explainer{padding:var(--section-y) 0 0;background:#fff;}
-  .explainer-grid{display:grid;grid-template-columns:1fr 1.02fr;gap:clamp(36px,5vw,72px);align-items:start;}
-  .explainer-img img{width:100%;height:auto;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.14);}
+  .explainer-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(36px,5vw,72px);align-items:start;}
+  /* portrait crop so the landscape photo reads as tall as the P1/P3 photos and
+     its top lines up with the body copy */
+  .explainer-img{display:flex;justify-content:center;}
+  .explainer-img img{width:auto;max-width:100%;height:var(--img-h);object-fit:cover;object-position:center;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.14);}
   .explainer h2{font-size:clamp(34px,4vw,52px);text-align:left;margin-bottom:30px;}
   .explainer p{margin:0 0 20px;}
   .explainer .actions{margin-top:26px;}
@@ -163,12 +169,14 @@
 
   /* ---------- About (cream) ---------- */
   .about{padding:var(--section-y) 0;}
-  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,72px);align-items:center;}
+  /* start-aligned so the portrait top lines up with the heading */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,72px);align-items:start;}
   .about h2{font-size:clamp(34px,4vw,52px);margin-bottom:30px;}
   .about h3{font-family:'Marcellus',serif;font-size:clamp(21px,1.9vw,26px);margin:32px 0 14px;}
   .about p{margin:0 0 20px;}
   .about .cite{font-style:italic;margin-top:28px;opacity:.9;}
-  .about .portrait img{border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.16);}
+  .about .portrait{display:flex;justify-content:center;}
+  .about .portrait img{width:auto;max-width:100%;height:var(--img-h);object-fit:cover;border-radius:0;box-shadow:0 24px 60px rgba(87,58,31,.16);}
 
   /* ---------- FAQ (red) ---------- */
   .faq{background:var(--red);color:var(--red-text);padding:var(--section-y) 0;}
@@ -178,8 +186,8 @@
   .faq-list .faq-item:last-child{border-bottom:1px solid var(--line-light);}
   .faq-q{
     width:100%;text-align:left;background:none;border:none;color:var(--red-text);cursor:pointer;
-    font-family:'Marcellus',serif;font-size:clamp(24px,2.4vw,34px);
-    padding:26px 6px;display:flex;align-items:center;gap:22px;transition:opacity .2s;
+    font-family:'Marcellus',serif;font-size:clamp(20px,1.9vw,26px);
+    padding:22px 6px;display:flex;align-items:center;gap:20px;transition:opacity .2s;
   }
   .faq-q:hover{opacity:.82;}
   .faq-q .sign{font-size:.9em;width:24px;flex:none;transition:transform .3s var(--ease);}
@@ -201,28 +209,24 @@
   .poem-illus{
     position:relative;display:block;width:100%;height:auto;
     z-index:0;pointer-events:none;
-    /* Bottom fade into the cream page — ink runs to 98%, so this softens the
-       couch/wash edge. The TOP of the head is feathered into the asset itself
-       (illustration-soft.png): a horizontal CSS band wide enough to soften that
-       cut would also wash out her eyebrows, which sit only ~5% below it. */
-    -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 3%, #000 82%, transparent 99%);
-    mask-image:linear-gradient(to bottom, transparent 0%, #000 3%, #000 82%, transparent 99%);
+    /* crisp on the white section for contrast — no fade mask (the drawing's own
+       transparent background reads as white here). */
   }
   .verse-layer{
-    position:absolute;inset:0;z-index:1;
-    /* left edge aligns to the site content column (same .wrap as the header
-       and About Emily). Top offset stays in vw so it tracks the full-bleed
-       artwork height: 12vw ≈ 15% down the image at every width. */
-    max-width:var(--maxw);margin:0 auto;
-    padding:12vw var(--gutter) 0;
+    /* the drawing's empty area is its upper-left quadrant (~62% wide, ~53% tall).
+       This box maps to that quadrant and centres the quote inside it, so the
+       verse sits in the middle of the white space at every viewport width. */
+    position:absolute;top:0;left:0;z-index:1;
+    width:62%;height:53%;
+    display:flex;align-items:center;justify-content:center;
+    padding:0 var(--gutter);
     pointer-events:none;
   }
   .poem .verse{
     pointer-events:auto;
-    /* no cap: each poem line stands on its own via <br>, so the block sizes to
-       the longest line within the content column — no wrapping. */
-    max-width:none;
-    font-style:italic;font-size:clamp(13px,1.3vw,20px);line-height:1.62;
+    /* condensed to ~2 lines, centred, at the same size as the body copy */
+    max-width:30ch;text-align:center;
+    font-style:italic;font-size:clamp(18px,.55vw + 16px,20px);line-height:1.6;
     /* scroll-scrubbed fade-in (driven by JS below); reduced-motion resets it */
     opacity:0;transform:translateY(20px);will-change:opacity,transform;
   }
@@ -248,17 +252,19 @@
   .find-me address{font-style:normal;line-height:1.5;margin:0 0 14px;}
   .find-me .directions{display:inline-block;font-family:'Marcellus',serif;font-size:17px;letter-spacing:.3px;text-decoration:none;border-bottom:1px solid var(--brown);padding-bottom:1px;transition:opacity .2s;}
   .find-me .directions:hover{opacity:.6;}
-  form .group-label{display:block;font-size:18px;margin:0 0 9px;}
-  form .row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-  form label{display:block;font-size:17px;margin:0 0 7px;}
-  form label .req{opacity:.55;font-size:14px;}
-  form .field{margin-bottom:20px;}
+  /* booking form kept a touch more compact */
+  .contact-form{max-width:520px;}
+  form .group-label{display:block;font-size:16.5px;margin:0 0 8px;}
+  form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  form label{display:block;font-size:15.5px;margin:0 0 6px;}
+  form label .req{opacity:.55;font-size:13px;}
+  form .field{margin-bottom:16px;}
   input,textarea{
-    width:100%;font-family:inherit;font-size:16.5px;color:var(--brown);
-    background:var(--cream);border:1.5px solid var(--brown);border-radius:28px;
-    padding:11px 18px;transition:border-color .2s,box-shadow .2s,background .2s;
+    width:100%;font-family:inherit;font-size:15.5px;color:var(--brown);
+    background:var(--cream);border:1.5px solid var(--brown);border-radius:26px;
+    padding:9px 16px;transition:border-color .2s,box-shadow .2s,background .2s;
   }
-  textarea{border-radius:18px;min-height:128px;resize:vertical;}
+  textarea{border-radius:16px;min-height:108px;resize:vertical;}
   input:focus,textarea:focus{outline:none;border-color:var(--brown-btn);background:var(--cream-2);box-shadow:0 0 0 3px rgba(87,58,31,.12);}
   .submit-wrap{text-align:center;margin-top:18px;}
   .form-success{
@@ -397,8 +403,8 @@
     </div>
     <div class="explainer-copy reveal">
       <h2>The Practice</h2>
-      <p>Craniosacral therapy works by creating a safe relational field where this intelligence and the heartfelt awareness of the practitioner, supports coming into physical, emotional, psychological and spiritual alignment, restoring balance and flow. In listening and attuning to the whole person, identifying deeply ingrained patterns and facilitating profound releases we support a return to wholeness and health.</p>
-      <p>The foundational principle of Craniosacral therapy is that health is always present. By tuning into the body&rsquo;s subtle rhythms we work with the whole person supporting circulation of craniosacral fluid, blood and lymph to support the immune system function and help the body enhance and maintain vitality and support integration towards a harmonious whole.</p>
+      <p>Craniosacral therapy works by creating a safe relational field where the body&rsquo;s intelligence, and the heartfelt awareness of the practitioner, supports coming into physical, emotional, psychological and spiritual alignment, restoring balance and flow. In listening and attuning to the whole person, identifying deeply ingrained patterns and facilitating profound releases we support a return to wholeness and health.</p>
+      <p>The foundational principle of Craniosacral therapy is that health is always present. By tuning into the body&rsquo;s subtle rhythms we work with the whole person, enhancing circulation of craniosacral fluid, blood and lymph to support immune system function and help the body enhance and maintain vitality, supporting integration towards a harmonious whole.</p>
       <div class="actions">
         <a href="https://www.ccst.co.uk" target="_blank" rel="noopener" class="btn">Learn more</a>
       </div>
@@ -412,13 +418,10 @@
   <div class="wrap about-grid">
     <div class="about-copy reveal">
       <h2>About Emily</h2>
-      <p>Emily holds a deep appreciation for bodies and how we inhabit them. As a yoga teacher, she has cultivated a capacity for stillness, listening and presence which she brings wholeheartedly to her work.</p>
+      <p>Emily holds a deep appreciation for bodies and how we inhabit them. She brings her capacity for stillness, listening and presence wholeheartedly to her work.</p>
       <p>Through Craniosacral therapy, Emily helps us to come more fully into our aliveness, enabling a more expansive perspective and appreciation for life. This presence and groundedness supports us to come home to ourselves.</p>
       <p>Trained at the College of Cranio-Sacral Therapy in London, Emily takes an integrative approach to treatment and draws from her massage training, yoga and Qigong practice, and interest in nutrition.</p>
-      <h3>How Emily Works</h3>
-      <p>Sessions are unhurried. There is time at the beginning to talk, time on the couch, and time afterwards to come back to yourself before stepping out into the day. Nothing is rushed, and nothing is done to you that you have not understood first.</p>
-      <p>Emily practises from a quiet room in Portobello, Edinburgh&rsquo;s seaside neighbourhood on the east of the city. Sessions last up to an hour.</p>
-      <p class="cite">&lsquo;What is the body? That shaddow of a shaddow of your love, that somehow contains the whole universe&rsquo; - Rumi</p>
+      <p class="cite">&lsquo;What is the body? That shadow of a shadow of your love, that somehow contains the whole universe&rsquo; - Rumi</p>
     </div>
     <div class="portrait reveal">
       <img src="images/about-emily.jpg" alt="Emily, craniosacral therapist, standing beneath a tree in a green shawl" />
@@ -432,6 +435,15 @@
     <h2 class="reveal">More Information</h2>
     <div class="faq-list reveal">
       <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span class="sign">+</span> Where does it come from?</button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Craniosacral therapy grew out of osteopathy in the early twentieth century, when practitioners began to notice a subtle, tidal motion expressing itself through the whole body &mdash; not only in the bones of the skull and the base of the spine, from which the work takes its name, but through the fluids and tissues throughout.</p>
+            <p>What has been carried forward from that early noticing is less a technique than a way of paying attention. The hands rest lightly. Nothing is forced. The work is slow because the body sets the pace, and because what is subtle only becomes audible in stillness.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span class="sign">+</span> How does it work?</button>
         <div class="faq-a">
           <div class="faq-a-inner">
@@ -441,36 +453,11 @@
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false"><span class="sign">+</span> Where does craniosacral therapy come from?</button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>Craniosacral therapy grew out of osteopathy in the early twentieth century, when practitioners began to notice a subtle, tidal motion expressing itself through the whole body &mdash; not only in the bones of the skull and the base of the spine, from which the work takes its name, but through the fluids and tissues throughout.</p>
-            <p>What has been carried forward from that early noticing is less a technique than a way of paying attention. The hands rest lightly. Nothing is forced. The work is slow because the body sets the pace, and because what is subtle only becomes audible in stillness.</p>
-          </div>
-        </div>
-      </div>
-      <div class="faq-item">
         <button class="faq-q" aria-expanded="false"><span class="sign">+</span> What does a treatment look like?</button>
         <div class="faq-a">
           <div class="faq-a-inner">
             <p>Following an initial conversation and brief case history you will usually lie down fully clothed on the couch, covered by a blanket for comfort. The practitioner will then tune in to your system using light touch, following the whole body and its subtle rhythms to address tensions as they manifest.</p>
             <p>People often find treatments profoundly relaxing and rebalancing. Your body determines where we work so that you remain in control and able to integrate what you are experiencing.</p>
-          </div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false"><span class="sign">+</span> What does a session feel like?</button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>Most people describe it as deeply relaxing. The touch is light and still rather than manipulative, and there is often a sense of settling, of warmth, or of more space than there was before. Some people talk throughout; many drift. There is no right way to be.</p>
-          </div>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false"><span class="sign">+</span> What should I wear?</button>
-        <div class="faq-a">
-          <div class="faq-a-inner">
-            <p>Whatever you are comfortable in. You stay fully clothed for the whole session, so soft, loose layers are ideal &mdash; you will be lying down under a blanket, so it is worth wearing something you do not mind resting in.</p>
           </div>
         </div>
       </div>
@@ -509,7 +496,7 @@
     <!-- illustration-soft.png = the original with the crown feathered per-column,
          so the undrawn top of the head dissolves instead of ending in a hard cut.
          images/illustration.png is kept untouched as the master. -->
-    <img class="poem-illus reveal" src="images/illustration-soft.png" alt="Watercolour illustration of a craniosacral therapy treatment" />
+    <img class="poem-illus reveal" src="images/illustration.png" alt="Watercolour illustration of a craniosacral therapy treatment" />
     <div class="verse-layer">
       <div class="verse">
         <p>This gentle, profound form of touch therapy invites us into deeper intimacy with ourselves, our lives and the world.</p>
@@ -528,7 +515,6 @@
         <p>Please get in touch to make an appointment.</p>
         <div class="find-me">
           <address>
-            Emily Haquin — Craniosacral Therapy<br>
             19 Rosefield Avenue<br>
             Portobello, Edinburgh<br>
             EH15 1AT
